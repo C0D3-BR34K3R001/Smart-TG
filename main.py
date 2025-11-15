@@ -1,9 +1,4 @@
-# do this in new terminal:  pip install aiohttp psutil
 
-"""
-Smart Telegram Bot with Enhanced AI, Owner Features, and OpenRouter Integration
-Requires: pip install python-telegram-bot python-dotenv requests beautifulsoup4 yt-dlp aiohttp
-"""
 
 import os
 import logging
@@ -241,32 +236,23 @@ async def dice_command(query, context):
 async def magic8_command(query, context):
     await query.edit_message_text("🎱 Magic 8 ball says... yes!")
 
-# ==================== OWNER MENU FIXES ====================
+# ==================== OWNER MENU ====================
+# Added proper definition of owner_menu to fix NameError
 
-async def analytics(query, context):
-    await query.edit_message_text("📈 Analytics coming soon")
-
-async def bot_settings(query, context):
-    await query.edit_message_text("⚙️ Bot settings coming soon")
-
-async def maintenance(query, context):
-    await query.edit_message_text("🧹 Maintenance tools coming soon")
-
-async def user_management(query, context):
-    await query.edit_message_text("📋 User management coming soon")
-
-async def clear_cache(query, context):
-    await query.edit_message_text("🧹 Cache cleared!")
-
-async def restart_bot(query, context):
-    await query.edit_message_text("🔄 Restarting bot... (not implemented)")
-
-async def stop_bot(query, context):
-    await query.edit_message_text("⏹ Bot stopping... (not implemented)")
-
-async def owner_broadcast(query, context):
-    context.user_data["awaiting_input"] = "broadcast"
-    await query.edit_message_text("📢 Send broadcast message text")
+async def owner_menu(query, context):
+    keyboard = [
+        [InlineKeyboardButton("📈 Analytics", callback_data="analytics"),
+         InlineKeyboardButton("⚙️ Bot Settings", callback_data="bot_settings")],
+        [InlineKeyboardButton("🧹 Maintenance", callback_data="maintenance"),
+         InlineKeyboardButton("📋 User Management", callback_data="user_management")],
+        [InlineKeyboardButton("🧹 Clear Cache", callback_data="clear_cache"),
+         InlineKeyboardButton("🔄 Restart Bot", callback_data="restart_bot")],
+        [InlineKeyboardButton("⏹ Stop Bot", callback_data="stop_bot"),
+         InlineKeyboardButton("📢 Broadcast Message", callback_data="owner_broadcast")],
+        [InlineKeyboardButton("🔙 Back", callback_data="start")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await query.edit_message_text("👑 Owner Panel", reply_markup=reply_markup)
 
 # ==================== MAIN MENU ====================
 

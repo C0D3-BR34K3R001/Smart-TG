@@ -4,5 +4,13 @@
     "joined": "2025-11-15T15:35:52.747230",
     "commands_used": 0,
     "is_banned": false
+  },
+  "7528793664": {
+    "username": "darkcodex_emp",
+    "joined": "2025-11-15T16:29:44.778084",
+    "commands_used": 0,
+    "is_banned": false,
+    "ai_model": "gpt-4",
+    "message_history": []
   }
 }
